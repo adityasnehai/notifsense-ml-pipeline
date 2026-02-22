@@ -1,0 +1,29 @@
+warning: no usable GPU found, --gpu-layers option will be ignored
+warning: one possible reason is that llama.cpp was compiled without GPU support
+warning: consult docs/build.md for compilation instructions
+llama_memory_breakdown_print: | memory breakdown [MiB] | total   free    self   model   context   compute    unaccounted |
+llama_memory_breakdown_print: |   - Host               |                  744 =   629 +      44 +      70                |
+llama_memory_breakdown_print: |   - CPU_REPACK         |                  455 =   455 +       0 +       0                |
+	Command being timed: "./llama.cpp/build/bin/llama-cli -m ./models/tinyllama-q4_k_m.gguf -ngl 0 -t 24 --no-warmup -cnv -st -sysf llm_mobile/system.txt -f llm_mobile/user.txt --grammar-file llm_mobile/notif.gbnf -n 1 --temp 0.1 --top-p 0.9 --repeat-penalty 1.05"
+	User time (seconds): 18.85
+	System time (seconds): 0.43
+	Percent of CPU this job got: 1224%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.57
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1205300
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 26
+	Minor (reclaiming a frame) page faults: 153365
+	Voluntary context switches: 13949
+	Involuntary context switches: 187
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

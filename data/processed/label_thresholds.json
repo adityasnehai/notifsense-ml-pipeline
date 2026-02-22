@@ -1,0 +1,11 @@
+{
+  "ComputerWork": 0.55,
+  "Indoors": 0.4,
+  "LyingDown": 0.45,
+  "Moving": 0.7,
+  "PhoneOnTable": 0.45,
+  "Sitting": 0.45,
+  "Sleeping": 0.45,
+  "Stationary": 0.1,
+  "Walking": 0.6
+}

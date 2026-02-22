@@ -1,0 +1,32 @@
+sampling_rate: 20
+window_size_seconds: 5
+stride_seconds: 2
+batch_size: 64
+learning_rate: 0.001
+epochs: 30
+num_labels: 24
+input_channels: 1
+device: auto
+
+# Prepared dataset paths
+metadata_path: data/processed/metadata.json
+train_csv: data/processed/train.csv
+val_csv: data/processed/val.csv
+test_csv: data/processed/test.csv
+
+# Runtime / optimization
+num_workers: 0
+seed: 42
+early_stopping_patience: 5
+weight_decay: 0.0001
+lr_reduce_factor: 0.5
+lr_reduce_patience: 2
+
+# Loss selection
+use_focal_loss: true
+focal_gamma: 2.0
+focal_alpha: null
+
+# Label pruning criteria
+prune_f1_threshold: 0.35
+prune_support_pct_threshold: 2.0

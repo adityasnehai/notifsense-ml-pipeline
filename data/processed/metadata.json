@@ -1,0 +1,303 @@
+{
+  "selected_feature_columns": [
+    "raw_acc:magnitude_stats:mean",
+    "raw_acc:magnitude_stats:std",
+    "raw_acc:magnitude_stats:moment3",
+    "raw_acc:magnitude_stats:moment4",
+    "raw_acc:magnitude_stats:percentile25",
+    "raw_acc:magnitude_stats:percentile50",
+    "raw_acc:magnitude_stats:percentile75",
+    "raw_acc:magnitude_stats:value_entropy",
+    "raw_acc:magnitude_stats:time_entropy",
+    "raw_acc:magnitude_spectrum:log_energy_band0",
+    "raw_acc:magnitude_spectrum:log_energy_band1",
+    "raw_acc:magnitude_spectrum:log_energy_band2",
+    "raw_acc:magnitude_spectrum:log_energy_band3",
+    "raw_acc:magnitude_spectrum:log_energy_band4",
+    "raw_acc:magnitude_spectrum:spectral_entropy",
+    "raw_acc:magnitude_autocorrelation:period",
+    "raw_acc:magnitude_autocorrelation:normalized_ac",
+    "raw_acc:3d:mean_x",
+    "raw_acc:3d:mean_y",
+    "raw_acc:3d:mean_z",
+    "raw_acc:3d:std_x",
+    "raw_acc:3d:std_y",
+    "raw_acc:3d:std_z",
+    "raw_acc:3d:ro_xy",
+    "raw_acc:3d:ro_xz",
+    "raw_acc:3d:ro_yz",
+    "proc_gyro:magnitude_stats:mean",
+    "proc_gyro:magnitude_stats:std",
+    "proc_gyro:magnitude_stats:moment3",
+    "proc_gyro:magnitude_stats:moment4",
+    "proc_gyro:magnitude_stats:percentile25",
+    "proc_gyro:magnitude_stats:percentile50",
+    "proc_gyro:magnitude_stats:percentile75",
+    "proc_gyro:magnitude_stats:value_entropy",
+    "proc_gyro:magnitude_stats:time_entropy",
+    "proc_gyro:magnitude_spectrum:log_energy_band0",
+    "proc_gyro:magnitude_spectrum:log_energy_band1",
+    "proc_gyro:magnitude_spectrum:log_energy_band2",
+    "proc_gyro:magnitude_spectrum:log_energy_band3",
+    "proc_gyro:magnitude_spectrum:log_energy_band4",
+    "proc_gyro:magnitude_spectrum:spectral_entropy",
+    "proc_gyro:magnitude_autocorrelation:period",
+    "proc_gyro:magnitude_autocorrelation:normalized_ac",
+    "proc_gyro:3d:mean_x",
+    "proc_gyro:3d:mean_y",
+    "proc_gyro:3d:mean_z",
+    "proc_gyro:3d:std_x",
+    "proc_gyro:3d:std_y",
+    "proc_gyro:3d:std_z",
+    "proc_gyro:3d:ro_xy",
+    "proc_gyro:3d:ro_xz",
+    "proc_gyro:3d:ro_yz",
+    "lf_measurements:light",
+    "lf_measurements:screen_brightness",
+    "lf_measurements:proximity",
+    "lf_measurements:proximity_cm",
+    "lf_measurements:battery_level",
+    "discrete:battery_plugged:is_ac",
+    "discrete:battery_plugged:is_usb",
+    "discrete:battery_plugged:is_wireless",
+    "discrete:battery_state:is_unplugged",
+    "discrete:battery_state:is_not_charging",
+    "discrete:battery_state:is_discharging",
+    "discrete:battery_state:is_charging",
+    "discrete:battery_state:is_full",
+    "discrete:app_state:is_active",
+    "discrete:app_state:is_inactive",
+    "discrete:app_state:is_background",
+    "discrete:ringer_mode:is_normal",
+    "discrete:ringer_mode:is_silent_no_vibrate",
+    "discrete:ringer_mode:is_silent_with_vibrate",
+    "discrete:time_of_day:between0and6",
+    "discrete:time_of_day:between3and9",
+    "discrete:time_of_day:between6and12",
+    "discrete:time_of_day:between9and15",
+    "discrete:time_of_day:between12and18",
+    "discrete:time_of_day:between15and21",
+    "discrete:time_of_day:between18and24",
+    "discrete:time_of_day:between21and3"
+  ],
+  "missing_requested_features": [],
+  "final_label_columns": [
+    "LyingDown",
+    "Sleeping",
+    "Sitting",
+    "Standing",
+    "Walking",
+    "Strolling",
+    "Running",
+    "Bicycling",
+    "Exercising",
+    "Stairs",
+    "Elevator",
+    "Stationary",
+    "Moving",
+    "PhoneInPocket",
+    "PhoneInHand",
+    "PhoneInBag",
+    "PhoneOnTable",
+    "Indoors",
+    "Outdoors",
+    "InCar",
+    "OnBus",
+    "AtGym",
+    "ComputerWork",
+    "InMeeting"
+  ],
+  "label_source_mapping": {
+    "LyingDown": [
+      "label:LYING_DOWN"
+    ],
+    "Sleeping": [
+      "label:SLEEPING"
+    ],
+    "Sitting": [
+      "label:SITTING"
+    ],
+    "Standing": [
+      "label:OR_standing"
+    ],
+    "Walking": [
+      "label:FIX_walking"
+    ],
+    "Strolling": [
+      "label:STROLLING"
+    ],
+    "Running": [
+      "label:FIX_running"
+    ],
+    "Bicycling": [
+      "label:BICYCLING"
+    ],
+    "Exercising": [
+      "label:OR_exercise"
+    ],
+    "Stairs": [
+      "label:STAIRS_-_GOING_UP",
+      "label:STAIRS_-_GOING_DOWN"
+    ],
+    "Elevator": [
+      "label:ELEVATOR"
+    ],
+    "PhoneInPocket": [
+      "label:PHONE_IN_POCKET"
+    ],
+    "PhoneInHand": [
+      "label:PHONE_IN_HAND"
+    ],
+    "PhoneInBag": [
+      "label:PHONE_IN_BAG"
+    ],
+    "PhoneOnTable": [
+      "label:PHONE_ON_TABLE"
+    ],
+    "Indoors": [
+      "label:OR_indoors"
+    ],
+    "Outdoors": [
+      "label:OR_outside"
+    ],
+    "InCar": [
+      "label:IN_A_CAR"
+    ],
+    "OnBus": [
+      "label:ON_A_BUS"
+    ],
+    "AtGym": [
+      "label:AT_THE_GYM"
+    ],
+    "ComputerWork": [
+      "label:COMPUTER_WORK"
+    ],
+    "InMeeting": [
+      "label:IN_A_MEETING"
+    ],
+    "Stationary": [
+      "Sitting",
+      "Standing",
+      "LyingDown",
+      "Sleeping"
+    ],
+    "Moving": [
+      "Walking",
+      "Strolling",
+      "Running",
+      "Bicycling",
+      "Exercising",
+      "Stairs"
+    ]
+  },
+  "sampling_window_assumptions": {
+    "sampling_rate_hz": 20,
+    "window_size_seconds": 5,
+    "stride_seconds": 2,
+    "note": "ExtraSensory file contains precomputed window-level features."
+  },
+  "label_frequencies": {
+    "LyingDown": {
+      "positive_count": 104210,
+      "positive_rate_pct": 27.616564108271984
+    },
+    "Sleeping": {
+      "positive_count": 83055,
+      "positive_rate_pct": 22.010303541047207
+    },
+    "Sitting": {
+      "positive_count": 136356,
+      "positive_rate_pct": 36.13553608624446
+    },
+    "Standing": {
+      "positive_count": 37782,
+      "positive_rate_pct": 10.012561415782862
+    },
+    "Walking": {
+      "positive_count": 22136,
+      "positive_rate_pct": 5.866234172351105
+    },
+    "Strolling": {
+      "positive_count": 806,
+      "positive_rate_pct": 0.21359707006301912
+    },
+    "Running": {
+      "positive_count": 1090,
+      "positive_rate_pct": 0.28885956125147744
+    },
+    "Bicycling": {
+      "positive_count": 5020,
+      "positive_rate_pct": 1.3303440343875383
+    },
+    "Exercising": {
+      "positive_count": 8081,
+      "positive_rate_pct": 2.141535884837788
+    },
+    "Stairs": {
+      "positive_count": 890,
+      "positive_rate_pct": 0.23585780689340816
+    },
+    "Elevator": {
+      "positive_count": 200,
+      "positive_rate_pct": 0.05300175435806925
+    },
+    "Stationary": {
+      "positive_count": 278348,
+      "positive_rate_pct": 73.7646616102993
+    },
+    "Moving": {
+      "positive_count": 30560,
+      "positive_rate_pct": 8.098668065912982
+    },
+    "PhoneInPocket": {
+      "positive_count": 23401,
+      "positive_rate_pct": 6.201470268665893
+    },
+    "PhoneInHand": {
+      "positive_count": 14573,
+      "positive_rate_pct": 3.861972831300716
+    },
+    "PhoneInBag": {
+      "positive_count": 10201,
+      "positive_rate_pct": 2.7033544810333225
+    },
+    "PhoneOnTable": {
+      "positive_count": 115037,
+      "positive_rate_pct": 30.485814080446062
+    },
+    "Indoors": {
+      "positive_count": 184692,
+      "positive_rate_pct": 48.945000079502634
+    },
+    "Outdoors": {
+      "positive_count": 12114,
+      "positive_rate_pct": 3.2103162614682548
+    },
+    "InCar": {
+      "positive_count": 6083,
+      "positive_rate_pct": 1.6120483588006762
+    },
+    "OnBus": {
+      "positive_count": 1794,
+      "positive_rate_pct": 0.4754257365918812
+    },
+    "AtGym": {
+      "positive_count": 1151,
+      "positive_rate_pct": 0.3050250963306886
+    },
+    "ComputerWork": {
+      "positive_count": 38081,
+      "positive_rate_pct": 10.091799038548176
+    },
+    "InMeeting": {
+      "positive_count": 5153,
+      "positive_rate_pct": 1.3655902010356542
+    }
+  },
+  "splits": {
+    "train_rows": 267819,
+    "val_rows": 70709,
+    "test_rows": 38818
+  },
+  "random_seed": 42
+}

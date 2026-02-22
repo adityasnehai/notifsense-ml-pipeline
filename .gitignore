@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+notifsense_env/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Local data artifacts (too large for git)
+dataset/
+data/raw/
+data/processed/*.csv
+data/processed/extrasensory/
+
+# Trained weights / exports / LLM artifacts
+models/*.pt
+models/*.onnx
+models/*.gguf
+models/*.tflite
+models/*.ptl
+
+# Runtime and logs
+*.log
+
+# Keep small metadata and config artifacts
+!data/processed/metadata.json
+!data/processed/label_thresholds.json

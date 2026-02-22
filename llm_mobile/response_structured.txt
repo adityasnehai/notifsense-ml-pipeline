@@ -1,0 +1,45 @@
+
+Loading model... |-\|/-\|/-\|/ 
+
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b8111-11c325c6e
+model      : tinyllama-q4_k_m.gguf
+modalities : text
+using custom system prompt
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read               add a text file
+
+
+> Context:
+Activity: Walking
+Confidence: 0.87
+Screen: OFF
+Battery: 45%
+
+Notification:
+App: com.instagram.android
+Category: SOCIAL
+Importance: LOW
+
+Current decision: SUPPRESS
+
+Return structured answer.
+
+|-\|/ Decision: DELAY
+Reason: The notification is not relevant to the current activity and may distract you from your intended task. Consider skipping it or setting a reminder for later.
+
+[ Prompt: 297.0 t/s | Generation: 6.3 t/s ]
+
+Exiting...
