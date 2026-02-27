@@ -1,7 +1,7 @@
 """Evaluate a DeepConvLSTM checkpoint on processed multi-label CSV data.
 
-This script is intentionally strict about checkpoint compatibility so we do not
-accidentally evaluate an MLP checkpoint with the DeepConvLSTM architecture.
+Strict checkpoint loading is the default so evaluations cannot silently use
+partially loaded weights.
 """
 
 from __future__ import annotations
@@ -53,6 +53,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=256)
     parser.add_argument("--threshold", type=float, default=0.5)
     parser.add_argument(
+        "--allow-nonstrict",
+        action="store_true",
+        help="Allow non-strict state_dict loading (not recommended).",
+    )
+    parser.add_argument(
         "--output",
         default="data/processed/deepconvlstm_eval.json",
         help="Path to save structured evaluation results",
@@ -78,7 +83,6 @@ def extract_state_dict(ckpt_obj: object) -> Dict[str, torch.Tensor]:
             return ckpt_obj["model_state_dict"]
         if "state_dict" in ckpt_obj:
             return ckpt_obj["state_dict"]
-        # Raw state_dict case.
         if all(isinstance(k, str) for k in ckpt_obj.keys()) and any(
             k.endswith(".weight") or k.endswith(".bias") for k in ckpt_obj.keys()
         ):
@@ -87,8 +91,20 @@ def extract_state_dict(ckpt_obj: object) -> Dict[str, torch.Tensor]:
 
 
 def checkpoint_looks_like_mlp(state_dict: Dict[str, torch.Tensor]) -> bool:
-    # Current MLP checkpoints in this project use keys like net.0.weight.
     return any(k.startswith("net.") for k in state_dict.keys())
+
+
+def resolve_label_columns(metadata_labels: List[str], checkpoint_obj: object) -> List[str]:
+    """Prefer checkpoint label order when available and valid for metadata."""
+    labels = list(metadata_labels)
+    if isinstance(checkpoint_obj, dict):
+        ckpt_labels = checkpoint_obj.get("label_columns")
+        if isinstance(ckpt_labels, list) and ckpt_labels:
+            ckpt_labels = [str(x) for x in ckpt_labels]
+            missing = [lbl for lbl in ckpt_labels if lbl not in set(metadata_labels)]
+            if not missing:
+                labels = ckpt_labels
+    return labels
 
 
 def load_thresholds(
@@ -205,17 +221,6 @@ def main() -> None:
             "Tip: train and save a DeepConvLSTM checkpoint first (e.g., models/deepconvlstm_best.pt)."
         )
 
-    metadata = load_processed_metadata(str(metadata_path))
-    feature_columns = list(metadata["selected_feature_columns"])
-    label_columns = list(metadata["final_label_columns"])
-
-    dataset = ProcessedCSVDataset(
-        csv_path=str(split_csv_path),
-        feature_columns=feature_columns,
-        label_columns=label_columns,
-    )
-    loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=0)
-
     checkpoint_obj = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     state_dict = extract_state_dict(checkpoint_obj)
 
@@ -225,23 +230,38 @@ def main() -> None:
             "Please provide a DeepConvLSTM checkpoint for this evaluator."
         )
 
+    metadata = load_processed_metadata(str(metadata_path))
+    feature_columns = list(metadata["selected_feature_columns"])
+    label_columns = resolve_label_columns(list(metadata["final_label_columns"]), checkpoint_obj)
+
+    dataset = ProcessedCSVDataset(
+        csv_path=str(split_csv_path),
+        feature_columns=feature_columns,
+        label_columns=label_columns,
+    )
+    loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=0)
+
     input_channels = int(cfg.get("input_channels", 1))
     num_labels_cfg = int(cfg.get("num_labels", len(label_columns)))
     num_labels = len(label_columns)
     if num_labels_cfg != num_labels:
         print(
-            f"[WARN] config num_labels={num_labels_cfg} but metadata has {num_labels}. "
-            "Using metadata label count."
+            f"[WARN] config num_labels={num_labels_cfg} but effective labels={num_labels}. "
+            "Using effective label count from metadata/checkpoint."
         )
 
     model = DeepConvLSTM(input_channels=input_channels, num_labels=num_labels).to(device)
-    missing, unexpected = model.load_state_dict(state_dict, strict=False)
-    if missing or unexpected:
-        print("[WARN] Non-strict checkpoint load detected")
-        if missing:
-            print(f"  Missing keys: {missing[:10]}")
-        if unexpected:
-            print(f"  Unexpected keys: {unexpected[:10]}")
+
+    if args.allow_nonstrict:
+        missing, unexpected = model.load_state_dict(state_dict, strict=False)
+        if missing or unexpected:
+            print("[WARN] Non-strict checkpoint load detected")
+            if missing:
+                print(f"  Missing keys: {missing[:10]}")
+            if unexpected:
+                print(f"  Unexpected keys: {unexpected[:10]}")
+    else:
+        model.load_state_dict(state_dict, strict=True)
 
     thresholds = load_thresholds(checkpoint_obj, label_columns, args.threshold)
 
